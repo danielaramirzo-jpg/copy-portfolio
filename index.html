@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daniela Ramírez Oviedo — Copy Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #191917;
+    --paper: #f6f3ee;
+    --warm: #edeae3;
+    --accent: #b84032;
+    --muted: #7c7870;
+    --rule: #d6d1c8;
+    --dark: #1e1e1c;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    font-size: 15px;
+  }
+
+  /* ── HEADER ── */
+  header {
+    padding: 3.5rem 5rem 2.5rem;
+    border-bottom: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 2rem;
+    opacity: 0;
+    animation: rise 0.7s 0.05s ease forwards;
+  }
+
+  .h-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.6rem;
+    font-weight: 300;
+    letter-spacing: -0.01em;
+    line-height: 1;
+  }
+
+  .h-role {
+    margin-top: 0.5rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .h-contact {
+    text-align: right;
+    font-size: 0.8rem;
+    color: var(--muted);
+    line-height: 2;
+  }
+
+  .h-contact a { color: var(--accent); text-decoration: none; }
+
+  /* ── NAV ── */
+  nav {
+    padding: 0 5rem;
+    border-bottom: 1px solid var(--rule);
+    display: flex;
+    opacity: 0;
+    animation: rise 0.7s 0.12s ease forwards;
+  }
+
+  nav button {
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    padding: 1rem 1.6rem 0.85rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.71rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    cursor: pointer;
+    position: relative;
+    top: 1px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  nav button.on { color: var(--ink); border-bottom-color: var(--accent); }
+  nav button:hover { color: var(--ink); }
+
+  /* ── INTRO STRIP ── */
+  .intro {
+    padding: 1.4rem 5rem;
+    background: var(--warm);
+    border-bottom: 1px solid var(--rule);
+    font-size: 0.83rem;
+    color: var(--muted);
+    opacity: 0;
+    animation: rise 0.7s 0.18s ease forwards;
+  }
+
+  .intro strong { color: var(--ink); font-weight: 400; }
+
+  /* ── SECTIONS ── */
+  .sec {
+    display: none;
+    padding: 3.5rem 5rem 6rem;
+    opacity: 0;
+    animation: rise 0.35s ease forwards;
+  }
+
+  .sec.on { display: block; }
+
+  /* ── SEC HEADER ── */
+  .sec-head {
+    display: flex;
+    align-items: baseline;
+    gap: 1.2rem;
+    padding-bottom: 1.8rem;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 3rem;
+  }
+
+  .sec-head h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 300;
+  }
+
+  .tag {
+    font-size: 0.67rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    padding: 0.18rem 0.55rem;
+  }
+
+  /* ── CARD GRID ── */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    margin-bottom: 1px;
+  }
+
+  .grid.three { grid-template-columns: repeat(3, 1fr); }
+
+  .card {
+    background: var(--paper);
+    padding: 2rem 2.2rem;
+    transition: background 0.18s;
+  }
+
+  .card:hover { background: var(--warm); }
+
+  .c-label {
+    font-size: 0.67rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.9rem;
+  }
+
+  .card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    line-height: 1.25;
+    margin-bottom: 0.35rem;
+  }
+
+  .c-brand {
+    font-size: 0.72rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    margin-bottom: 1.1rem;
+  }
+
+  .card p {
+    font-size: 0.84rem;
+    color: #3e3d39;
+    line-height: 1.75;
+    margin-bottom: 0.8rem;
+  }
+
+  .c-quote {
+    border-left: 2px solid var(--accent);
+    padding: 0.9rem 1.1rem;
+    background: var(--warm);
+    font-size: 0.85rem;
+    line-height: 1.7;
+    font-style: italic;
+    color: var(--ink);
+    margin: 1rem 0;
+  }
+
+  .c-quote em { font-style: normal; font-weight: 500; }
+
+  .c-lang {
+    display: inline-block;
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: var(--warm);
+    border: 1px solid var(--rule);
+    padding: 0.15rem 0.5rem;
+    color: var(--muted);
+    margin-top: 0.6rem;
+  }
+
+  .c-note {
+    font-size: 0.74rem;
+    color: var(--muted);
+    margin-top: 0.9rem;
+    padding-top: 0.9rem;
+    border-top: 1px solid var(--rule);
+    line-height: 1.6;
+  }
+
+  /* ── FULL-WIDTH BAND ── */
+  .band {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    padding: 2rem 2.2rem;
+    margin-bottom: 1px;
+  }
+
+  /* ── EMAIL STACK ── */
+  .email-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    margin-top: 2rem;
+  }
+
+  .e-row {
+    display: grid;
+    grid-template-columns: 2.2rem 1fr 6rem;
+    gap: 1.5rem;
+    align-items: start;
+    background: var(--paper);
+    padding: 1.6rem 2rem;
+    transition: background 0.18s;
+  }
+
+  .e-row:hover { background: var(--warm); }
+
+  .e-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-style: italic;
+    color: var(--accent);
+    padding-top: 0.05rem;
+  }
+
+  .e-body h4 {
+    font-size: 0.88rem;
+    font-weight: 500;
+    margin-bottom: 0.3rem;
+  }
+
+  .e-body p {
+    font-size: 0.82rem;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  .e-subj {
+    font-size: 0.78rem;
+    color: var(--accent);
+    font-style: italic;
+    margin-top: 0.4rem;
+  }
+
+  .e-subj.meta {
+    color: var(--muted);
+    font-style: normal;
+    font-size: 0.72rem;
+    margin-top: 0.2rem;
+  }
+
+  .e-layer {
+    font-size: 0.66rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border: 1px solid var(--rule);
+    padding: 0.2rem 0.5rem;
+    text-align: center;
+    align-self: center;
+  }
+
+  /* ── AD GRID ── */
+  .ad-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+  }
+
+  .ad {
+    background: var(--paper);
+    padding: 1.8rem 2rem;
+    transition: background 0.18s;
+  }
+
+  .ad:hover { background: var(--warm); }
+
+  .ad-plat {
+    font-size: 0.66rem;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .ad-plat::before {
+    content: '';
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+
+  .ad h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    line-height: 1.3;
+    margin-bottom: 0.8rem;
+  }
+
+  .ad-copy {
+    font-size: 0.84rem;
+    line-height: 1.75;
+    color: #3e3d39;
+    border-left: 2px solid var(--rule);
+    padding-left: 1rem;
+    margin: 0.7rem 0;
+    font-style: italic;
+  }
+
+  .ad-note {
+    font-size: 0.74rem;
+    color: var(--muted);
+    margin-top: 0.8rem;
+    line-height: 1.6;
+  }
+
+  .ad-note strong { color: var(--ink); font-weight: 400; }
+
+  /* ── DARK BOX ── */
+  .dark-box {
+    background: var(--dark);
+    color: #e8e4dc;
+    padding: 2.8rem;
+    margin-top: 1px;
+  }
+
+  .dark-box h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 300;
+    margin-bottom: 2rem;
+    color: #f0ece4;
+  }
+
+  .dark-cols {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .dark-col h4 {
+    font-size: 0.67rem;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+
+  .dark-col p {
+    font-size: 0.82rem;
+    color: #b4b0a8;
+    line-height: 1.65;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--rule);
+    padding: 1.8rem 5rem;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+
+  footer a { color: var(--accent); text-decoration: none; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 860px) {
+    header, nav, .intro, .sec { padding-left: 1.5rem; padding-right: 1.5rem; }
+    header { grid-template-columns: 1fr; }
+    .h-contact { text-align: left; }
+    .grid, .grid.three, .ad-grid { grid-template-columns: 1fr; }
+    .dark-cols { grid-template-columns: 1fr; }
+    .e-row { grid-template-columns: 2rem 1fr; }
+    .e-layer { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div>
+    <div class="h-name">Daniela Ramírez Oviedo</div>
+    <div class="h-role">Copywriter &amp; Content Strategist &nbsp;·&nbsp; Bilingual ES / EN &nbsp;·&nbsp; 6+ years remote</div>
+  </div>
+  <div class="h-contact">
+    danielaramirzo@gmail.com<br>
+    +57 317 794 9759<br>
+    Quindío, Colombia<br>
+    <a href="https://canva.link/mj0k4rzg4s3jrww" target="_blank">Full portfolio ↗</a>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav>
+  <button class="on" onclick="show('lp', this)">Landing Pages</button>
+  <button onclick="show('em', this)">Email Marketing</button>
+  <button onclick="show('ad', this)">Paid Ads</button>
+</nav>
+
+<!-- INTRO -->
+<div class="intro">
+  <strong>Selected work across three formats</strong> — landing pages, email sequences, and ad copy. Clients span health &amp; wellness, B2B SaaS, medical services, and natural skincare. Some brand details are kept general to respect client confidentiality. All copy is bilingual ES/EN.
+</div>
+
+
+<!-- ════════════ LANDING PAGES ════════════ -->
+<div id="lp" class="sec on">
+  <div class="sec-head">
+    <h2>Landing Pages &amp; Web Copy</h2>
+    <span class="tag">Text Strategy · Collaboration</span>
+  </div>
+
+  <div class="band" style="margin-bottom:1px;">
+    <p style="font-size:0.83rem;color:var(--muted);max-width:740px;line-height:1.8;">Landing page work spans <strong style="color:var(--ink);font-weight:400">copy strategy, text production, and team collaboration</strong> — working alongside designers, strategists, and brand leads. My contribution is the verbal layer: brand voice architecture, messaging hierarchy, and the final text across all pages.</p>
+  </div>
+
+  <div class="grid">
+
+    <!-- IBP -->
+    <div class="card">
+      <div class="c-label">Agency · Multi-Account · Bilingual · 2024–2026</div>
+      <h3>Invicta Business Partners — Agency Copy Lead</h3>
+      <div class="c-brand">IBP · Remote · <a href="https://www.invictabp.com" target="_blank" style="color:var(--accent);text-decoration:none;">invictabp.com ↗</a></div>
+      <p>Almost two years managing copy strategy and production across 40+ active health and wellness accounts simultaneously — the full range from D2C supplements and medical services to natural skincare and B2B platforms. High-volume, high-standard bilingual environment.</p>
+      <div class="c-quote">
+        The daily output: approximately 25 pieces of copy across different brands — each with its own voice, audience, and compliance constraints. Web copy collaboration on client sites including IBP's own platform, brand voice reviews, campaign texts, and account-specific content systems.
+      </div>
+      <span class="c-lang">Bilingual ES / EN · 40+ brands</span>
+      <div class="c-note"><strong>Scope:</strong> ~25 copy pieces/day across 40+ accounts · web copy collaboration on client and agency sites · brand voice systems · campaign texts · bilingual production at scale. The throughput required building internal systems — briefing templates, voice filters, editorial checklists — to maintain quality without sacrificing speed.</div>
+    </div>
+
+    <!-- VAU Nutrition -->
+    <div class="card">
+      <div class="c-label">D2C · Wellness Supplement · EN</div>
+      <h3>VAU Nutrition — US Market Launch</h3>
+      <div class="c-brand">IBP · US Market · 2026 · <a href="https://getvau.com" target="_blank" style="color:var(--accent);text-decoration:none;">getvau.com ↗</a></div>
+      <p>Landing copy for VAU Nutrition's melatonin-free supplement entering the competitive US wellness market. ICP: science-savvy Millennials who've been burned by every wellness trend. The brief: earn their attention before asking for their trust.</p>
+      <div class="c-quote">
+        <em>Your sleep isn't broken. Your nervous system is dysregulated.</em><br><br>
+        Most supplements sedate you. REST FIRST™ regulates you. There's a difference — and once you understand it, you can't unsee it.<br><br>
+        Magnesium glycinate. L-Theanine. Ashwagandha. Science you can look up. A ritual you'll actually want to keep.
+      </div>
+      <span class="c-lang">English · US Market</span>
+      <div class="c-note"><strong>My scope:</strong> full brand knowledge system built in 3 weeks ahead of US market launch — voice architecture, master lexicon, FTC-compliant claim framework, email sequences, ad scripts, and social copy across 5 channels. Team collaboration: founder + marketing lead.</div>
+    </div>
+
+    <!-- Fox Ordering -->
+    <div class="card">
+      <div class="c-label">B2B · Restaurant Tech · Bilingual</div>
+      <h3>Fox Ordering — Platform &amp; Internal Communications</h3>
+      <div class="c-brand">Fox Ordering · 2025–2026 · <a href="https://foxordering.com" target="_blank" style="color:var(--accent);text-decoration:none;">foxordering.com ↗</a></div>
+      <p>Bilingual copy for a restaurant ordering and operations platform. Dual scope: external-facing web copy for business clients, and internal communications strategy for a 180+ person remote team across Latin America and the US.</p>
+      <div class="c-quote">
+        <em>Run every order. Own every shift.</em><br><br>
+        From the first ticket to the close-of-day report — one platform, zero gaps. Built for operators who can't afford surprises.<br><br>
+        —<br><br>
+        <em>Cada pedido entra. Cada turno cierra. Todo en un solo lugar.</em><br><br>
+        Para equipos que no tienen tiempo de buscar la información — la información llega a ellos.
+      </div>
+      <span class="c-lang">Bilingual ES / EN</span>
+      <div class="c-note"><strong>My scope:</strong> website copy + internal comms strategy reaching 180+ team members — Slack content, events, recognition programs (Fox Lab, Fox Purpose, Fox Track). Team collaboration: design team + People &amp; Culture lead.</div>
+    </div>
+
+    <!-- BioNuclear -->
+    <div class="card">
+      <div class="c-label">Health · Medical Services · Bilingual</div>
+      <h3>BioNuclear — Medical Platform Copy</h3>
+      <div class="c-brand">IBP · Colombia · 2025 · <a href="https://bionuclear.com.co" target="_blank" style="color:var(--accent);text-decoration:none;">bionuclear.com.co ↗</a></div>
+      <p>Copy for a medical services platform serving both patients and referring physicians on the same site. Challenge: one brand voice that reads as credible to a cardiologist and as human to a first-time patient.</p>
+      <div class="c-quote">
+        <em>Ciencia que inspira confianza. Cuidado que se siente.</em><br><br>
+        Detrás de cada resultado hay una persona esperando respuestas. Por eso en BioNuclear la precisión diagnóstica no está separada del acompañamiento — las dos van juntas, desde el primer contacto.<br><br>
+        —<br><br>
+        <em>Precision you can trust. Care that stays with you.</em>
+      </div>
+      <span class="c-lang">Bilingual ES / EN</span>
+      <div class="c-note"><strong>My scope:</strong> full text production across dual audiences — patients and referring physicians. Team collaboration: medical leads + web developer. Compliance review included.</div>
+    </div>
+
+    <!-- WAIKA -->
+    <div class="card">
+      <div class="c-label">Natural Skincare · Brand Voice · Pre-Launch · ES</div>
+      <h3>WAIKA Natural Care — Brand Voice &amp; Launch System</h3>
+      <div class="c-brand">IBP · Colombia · 2026</div>
+      <p>Full verbal identity system for WAIKA, a skincare brand born in the Sierra Nevada de Santa Marta. Built the brand voice architecture before writing a single piece of copy — the foundation everything else stands on.</p>
+      <div class="c-quote">
+        <em>No te pedimos que confíes. Te pedimos que mires.</em><br><br>
+        Diez pieles reales. Cuatro regiones. Ocho semanas de proceso documentado sin filtro.<br><br>
+        Esto no es una promesa de marca. Es evidencia.
+      </div>
+      <span class="c-lang">Español · Pre-Launch</span>
+      <div class="c-note"><strong>My scope:</strong> pre-launch brand system — voice manual, master lexicon, website copy, product kit letter, and launch campaign texts. Delivered as the complete verbal foundation before go-to-market. Team collaboration: strategist + designer.</div>
+    </div>
+
+    <!-- With O Coffee -->
+    <div class="card">
+      <div class="c-label">Premium Coffee · Naming Strategy · Pre-Launch · EN</div>
+      <h3>With O Coffee — Brand Naming &amp; Copy Architecture</h3>
+      <div class="c-brand">Fox Ordering · US Market · 2025–2026</div>
+      <p>Naming strategy and brand copy for a Colombian specialty coffee brand entering the US market across Michigan, Minnesota, Illinois, and Pennsylvania. Target: "Wise Ones" — urban professionals who treat coffee as ritual, not routine.</p>
+      <div class="c-quote">
+        <em>Where moments intersect.</em><br><br>
+        Not the origin story. Not the altitude. The moment your cup hits the table and the conversation starts. That's what we're here for.<br><br>
+        —<br><br>
+        <em>Coffee &amp; Conversation. Your ritual &amp; ours.</em>
+      </div>
+      <span class="c-lang">English · US Market · Pre-Launch</span>
+      <div class="c-note"><strong>My scope:</strong> competitive naming research across 100+ brands, 3 finalist concepts with full brand architecture, taglines, product line naming, and 90-day copy direction. Team collaboration: brand strategist + visual designer.</div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ════════════ EMAIL MARKETING ════════════ -->
+<div id="em" class="sec">
+  <div class="sec-head">
+    <h2>Email Marketing</h2>
+    <span class="tag">Sequences &amp; Flows</span>
+  </div>
+
+  <div class="band">
+    <div class="c-label">System Overview</div>
+    <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:300;margin-bottom:0.6rem;">3-Layer Email Architecture — US Wellness Brand</h3>
+    <p style="font-size:0.84rem;color:var(--muted);max-width:700px;line-height:1.75;">Built for a US market launch: a full email lifecycle system segmented by funnel stage. Each layer has its own tone temperature, hook type, and objective — so no email sounds like it belongs to a different brand than the next.</p>
+  </div>
+
+  <div class="email-stack">
+
+    <div class="e-row">
+      <div class="e-num">1</div>
+      <div class="e-body">
+        <h4>Layer 1 — Acquisition / Onboarding (EN)</h4>
+        <p>Cold to warm. Opens with a problem reframe — not a product pitch. Tone: direct, educational, curious. Designed to earn the right to the next email before asking for anything.</p>
+        <div class="e-subj">Subject: "You're not an insomniac. Here's what's actually happening."</div>
+        <div class="e-subj meta">Hook: PROBLEM · Goal: open + click · Target: 25%+ open rate</div>
+      </div>
+      <div class="e-layer">Layer 1 · EN</div>
+    </div>
+
+    <div class="e-row">
+      <div class="e-num">2</div>
+      <div class="e-body">
+        <h4>Layer 2 — Educación / Consideración (ES)</h4>
+        <p>Ciencia + historia. Explica el mecanismo del producto sin sonar a manual técnico. Tono más lento, más profundo. El objetivo es construir confianza y desarmar objeciones antes del CTA de compra.</p>
+        <div class="e-subj">Asunto: "La melatonina no arregló tu sueño. Y hay una razón para eso."</div>
+        <div class="e-subj meta">Hook: REENCUADRE + CURIOSIDAD · Meta: consideración · Target: 4%+ CTR</div>
+      </div>
+      <div class="e-layer">Layer 2 · ES</div>
+    </div>
+
+    <div class="e-row">
+      <div class="e-num">3</div>
+      <div class="e-body">
+        <h4>Layer 3 — Retention / Loyalty (EN)</h4>
+        <p>Post-purchase ritual. The email becomes a relationship — reinforcing habit, deepening brand identity, creating community around the product experience. Founder voice prominent. Sells the next purchase through belonging, not urgency.</p>
+        <div class="e-subj">Subject: "30 days in. Here's what your nervous system is doing."</div>
+        <div class="e-subj meta">Hook: RITUAL · Goal: repeat purchase + advocacy · Target: 20%+ open rate</div>
+      </div>
+      <div class="e-layer">Layer 3 · EN</div>
+    </div>
+
+    <div class="e-row">
+      <div class="e-num">4</div>
+      <div class="e-body">
+        <h4>Cold Outreach — Secuencias B2B (ES/EN)</h4>
+        <p>Secuencias multi-toque para más de 40 cuentas de salud y bienestar. Cada secuencia abre con un hook específico al ICP de la marca — no un pitch genérico. Tono: directo, con autoridad, sin sonar agresivo.</p>
+        <div class="e-subj">Asunto ejemplo: "Tu competencia ya está haciendo esto. [Marca] todavía no."</div>
+        <div class="e-subj meta">Hook: FOMO + PROBLEMA · Meta: respuesta o demo</div>
+      </div>
+      <div class="e-layer">B2B · ES/EN</div>
+    </div>
+
+    <div class="e-row">
+      <div class="e-num">5</div>
+      <div class="e-body">
+        <h4>Skincare Brand — Launch Welcome Series (ES)</h4>
+        <p>Kit de bienvenida para participantes de un programa de testeo de producto. Tono: íntimo, pausado, como recibir algo que tardó generaciones en llegar. No vende — acompaña. Primer email del programa de pieles reales.</p>
+        <div class="e-subj">Asunto: "Esto que tienes en tus manos tardó más que un proceso de laboratorio."</div>
+        <div class="e-subj meta">Hook: INTIMIDAD + ORIGEN · Meta: activación y retención temprana</div>
+      </div>
+      <div class="e-layer">Launch · ES</div>
+    </div>
+
+    <div class="e-row">
+      <div class="e-num">6</div>
+      <div class="e-body">
+        <h4>Cart Recovery — Abandoned Flow (EN)</h4>
+        <p>3-touch sequence that recovers abandoned carts without pressure. Tone: calm, confident, offer-forward. Removes friction rather than manufacturing urgency — because the ICP doesn't respond well to pressure tactics.</p>
+        <div class="e-subj">Subject: "Your ritual is still here. Here's free shipping."</div>
+        <div class="e-subj meta">Hook: OFFER + STILL INTERESTED · Goal: purchase recovery</div>
+      </div>
+      <div class="e-layer">Recovery · EN</div>
+    </div>
+
+  </div>
+
+  <div class="dark-box">
+    <h3>How I build email systems</h3>
+    <div class="dark-cols">
+      <div class="dark-col">
+        <h4>Voice architecture first</h4>
+        <p>Before writing a single email, I map the brand lexicon — what words belong, what's prohibited, and how tone shifts across funnel stages. Consistency at scale requires a system, not just good instincts.</p>
+      </div>
+      <div class="dark-col">
+        <h4>A/B-ready from the start</h4>
+        <p>Subject lines and hooks are written in testable variations from day one. I document what was tested, what won, and why — so the next campaign starts from a higher baseline.</p>
+      </div>
+      <div class="dark-col">
+        <h4>Bilingual by design</h4>
+        <p>ES and EN are not translations of each other — they're distinct voices for distinct audiences. I write both from scratch, matching rhythm, tone, and cultural register to each language.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════ PAID ADS ════════════ -->
+<div id="ad" class="sec">
+  <div class="sec-head">
+    <h2>Paid Ad Copy</h2>
+    <span class="tag">Performance · Direct Response</span>
+  </div>
+
+  <div class="band" style="margin-bottom:1px;">
+    <div class="c-label">Framework</div>
+    <p style="font-size:0.84rem;color:var(--muted);max-width:720px;line-height:1.8;">My ad copy is structured around a 4-step attention framework: <strong style="color:var(--ink);font-weight:400">pattern interrupt → emotional curiosity → emotional alignment → persuasion.</strong> The goal is to make people feel before they think. Most brands start at step 4. That's why their ads don't convert. Copy that earns the reader's attention before it asks for their money performs consistently better across funnel stages.</p>
+  </div>
+
+  <div class="ad-grid">
+
+    <div class="ad">
+      <div class="ad-plat">Meta · Problem/Solution · EN</div>
+      <h4>Sleep Supplement — Cold Audience</h4>
+      <div class="ad-copy">
+        You're not an insomniac. You're dysregulated.<br><br>
+        Your cortisol spikes at night because your wind-down is broken — not your sleep. This isn't another supplement. It's a melatonin-free ritual designed to regulate your nervous system, not sedate it.<br><br>
+        Science-led. Sensory. Built for how your body actually works.<br><br>
+        Free shipping on your first order → Shop now.
+      </div>
+      <div class="ad-note"><strong>Hook:</strong> Reframes the industry narrative. Customer ends up on our side, not the defensive.</div>
+    </div>
+
+    <div class="ad">
+      <div class="ad-plat">Meta · Prueba Social · ES</div>
+      <h4>Skincare — Audiencia Tibia</h4>
+      <div class="ad-copy">
+        "Tres semanas y mi piel ya no se ve igual. No cambié nada más — solo esto."<br><br>
+        10 personas reales. 4 regiones. Un proceso documentado sin filtro. Sin promesas de resultado en 7 días. Sin antes y después de estudio.<br><br>
+        Solo evidencia honesta, visible en el tiempo.<br><br>
+        Únete al proceso →
+      </div>
+      <div class="ad-note"><strong>Hook:</strong> Prueba social sin exageración — exactamente lo que el ICP está buscando después de que el mercado los decepcionó.</div>
+    </div>
+
+    <div class="ad">
+      <div class="ad-plat">Meta · Education · EN</div>
+      <h4>Sleep Supplement — Science Hook</h4>
+      <div class="ad-copy">
+        75% of adults are magnesium deficient.<br>
+        Magnesium is the #1 mineral for cortisol regulation.<br>
+        That's why your 3am wake-ups won't stop.<br><br>
+        No melatonin. No grogginess. Just regulation.<br><br>
+        Try it today →
+      </div>
+      <div class="ad-note"><strong>Hook:</strong> Curiosity gap — opens a data loop the brain needs to close before scrolling.</div>
+    </div>
+
+    <div class="ad">
+      <div class="ad-plat">TikTok Native · ES/EN · 7 words max</div>
+      <h4>Wellness — Platform-Specific Copy</h4>
+      <div class="ad-copy">
+        Free shipping — launching now<br>
+        ·<br>
+        15% off your first ritual<br>
+        ·<br>
+        Envío gratis — lanzamiento esta semana<br>
+        ·<br>
+        Tu ritual de noche empieza aquí
+      </div>
+      <div class="ad-note"><strong>Rule:</strong> On TikTok, the video does the work. Copy = offer only. Never repurpose a Meta ad — create natively for the platform.</div>
+    </div>
+
+    <div class="ad">
+      <div class="ad-plat">Meta · Lanzamiento · ES</div>
+      <h4>Skincare — Semana de Lanzamiento</h4>
+      <div class="ad-copy">
+        No te vamos a decir que es el mejor producto del mercado.<br><br>
+        Vamos a mostrarte qué le pasa a la piel de 10 personas reales en 8 semanas de uso. Sin filtro. Sin promesas. Con evidencia.<br><br>
+        Si lo que buscas es un proceso honesto — aquí está.<br><br>
+        Mira el proceso →
+      </div>
+      <div class="ad-note"><strong>Hook:</strong> Confronta el modelo de mercado directamente. Funciona con un ICP que ya desconfía de la publicidad.</div>
+    </div>
+
+    <div class="ad">
+      <div class="ad-plat">Meta · B2B · EN</div>
+      <h4>Operations Platform — Decision Maker</h4>
+      <div class="ad-copy">
+        Your team is managing orders in three different systems.<br>
+        Your kitchen is printing tickets from two of them.<br>
+        Your close-of-day report doesn't match either.<br><br>
+        One platform. Every order. Zero gaps.<br><br>
+        See it in 15 minutes →
+      </div>
+      <div class="ad-note"><strong>Hook:</strong> Problem mirroring — names the specific pain before introducing the product. Written for operators, not IT teams.</div>
+    </div>
+
+  </div>
+
+  <div class="dark-box">
+    <h3>How I approach performance copy</h3>
+    <div class="dark-cols">
+      <div class="dark-col">
+        <h4>Funnel-matched messaging</h4>
+        <p>Cold audiences need pattern interrupts and emotional alignment. Warm audiences need proof and objection handling. Conversion audiences need frictionless offers. I never run bottom-funnel copy at cold traffic.</p>
+      </div>
+      <div class="dark-col">
+        <h4>Compliance-aware</h4>
+        <p>Health and wellness brands require careful language. I work within FTC-safe and INVIMA-safe frameworks — "supports / promotes / designed for" — and build compliant copy that still converts.</p>
+      </div>
+      <div class="dark-col">
+        <h4>Platform-native always</h4>
+        <p>Meta copy and TikTok copy are different formats with different rules. I write for each platform natively — not repurposed — because the algorithm rewards content that fits the context.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span>Daniela Ramírez Oviedo · Copy Portfolio 2026</span>
+  <span>
+    <a href="mailto:danielaramirzo@gmail.com">danielaramirzo@gmail.com</a>
+    &nbsp;·&nbsp;
+    <a href="https://canva.link/mj0k4rzg4s3jrww" target="_blank">Full portfolio ↗</a>
+  </span>
+</footer>
+
+<script>
+  function show(id, btn) {
+    document.querySelectorAll('.sec').forEach(s => s.classList.remove('on'));
+    document.querySelectorAll('nav button').forEach(b => b.classList.remove('on'));
+    const sec = document.getElementById(id);
+    sec.classList.add('on');
+    btn.classList.add('on');
+    sec.style.animation = 'none';
+    sec.offsetHeight;
+    sec.style.animation = 'rise 0.35s ease forwards';
+  }
+</script>
+
+</body>
+</html>
